@@ -76,6 +76,22 @@ export default function InputForm() {
     console.log(media);
   };
 
+  const handleSubmit = () => {
+    // an object that will be passed to the fetch method to show that it is a post request
+    const postMethod = {
+      method: "POST",
+    };
+
+    //
+
+    console.log("submitting");
+
+    fetch(`/api?term=${searchText}&media=${media}`, postMethod)
+      .then((response) => response.text())
+      .then((data) => console.log(data));
+    // .catch((err) => console.log(err));
+  };
+
   return (
     <div>
       <FormControl className={classesInput.margin} style={{ minWidth: 300 }}>
@@ -119,7 +135,8 @@ export default function InputForm() {
         variant="contained"
         size="large"
         color="primary"
-        className={classes.margin}>
+        className={classes.margin}
+        onClick={() => handleSubmit()}>
         Search
       </Button>
     </div>
