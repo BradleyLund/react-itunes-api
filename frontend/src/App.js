@@ -1,10 +1,11 @@
-import logo from "./logo.svg";
 import "./App.css";
-import NativeSelects from "./Components/Select";
+import NativeSelects from "./Components/NativeSelects";
+import CustomizedSelects from "./Components/SearchInput";
 
 function App() {
   return (
     <div className="App">
+      <CustomizedSelects />
       <NativeSelects />
     </div>
   );
