@@ -1,10 +1,7 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import NativeSelect from "@material-ui/core/NativeSelect";
 import InputBase from "@material-ui/core/InputBase";
 
 const BootstrapInput = withStyles((theme) => ({
@@ -50,15 +47,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomizedSelects() {
   const classes = useStyles();
-  const [age, setAge] = React.useState("");
+  const [searchText, setSearchText] = React.useState("");
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setSearchText(event.target.value);
+    console.log(searchText);
   };
   return (
     <div>
-      <FormControl className={classes.margin}>
-        <InputLabel htmlFor="demo-customized-textbox">Age</InputLabel>
-        <BootstrapInput id="demo-customized-textbox" />
+      <FormControl className={classes.margin} style={{ minWidth: 300 }}>
+        <InputLabel htmlFor="demo-customized-textbox">Search</InputLabel>
+        <BootstrapInput
+          id="demo-customized-textbox"
+          value={searchText}
+          onChange={handleChange}
+        />
       </FormControl>
     </div>
   );

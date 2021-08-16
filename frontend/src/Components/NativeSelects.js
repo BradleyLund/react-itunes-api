@@ -32,7 +32,10 @@ export default function NativeSelects() {
 
   return (
     <div>
-      <FormControl variant="outlined" className={classes.formControl}>
+      <FormControl
+        variant="outlined"
+        className={classes.formControl}
+        style={{ minWidth: 300 }}>
         <InputLabel htmlFor="outlined-age-native-simple">
           Type of Media
         </InputLabel>
