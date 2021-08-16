@@ -4,6 +4,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputBase from "@material-ui/core/InputBase";
+import Button from "@material-ui/core/Button";
 
 // I probably need to combine the two input and select into one component to access both states when the user clicks submit
 // maybe try using hooks to get that working
@@ -114,6 +115,13 @@ export default function InputForm() {
           <option value={"all"}>All</option>
         </Select>
       </FormControl>
+      <Button
+        variant="contained"
+        size="large"
+        color="primary"
+        className={classes.margin}>
+        Search
+      </Button>
     </div>
   );
 }
