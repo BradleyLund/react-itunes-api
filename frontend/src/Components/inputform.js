@@ -5,6 +5,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputBase from "@material-ui/core/InputBase";
 import Button from "@material-ui/core/Button";
+import SearchResults from "./searchresults";
 
 // I probably need to combine the two input and select into one component to access both states when the user clicks submit
 // maybe try using hooks to get that working
@@ -34,9 +35,6 @@ const BootstrapInput = withStyles((theme) => ({
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
       "Roboto",
       '"Helvetica Neue"',
       "Arial",
@@ -76,26 +74,40 @@ export default function InputForm() {
     console.log(media);
   };
 
+  const [searchResults, setSearchResults] = React.useState([]);
+
   const handleSubmit = () => {
     // an object that will be passed to the fetch method to show that it is a post request
     const postMethod = {
       method: "POST",
     };
 
-    //
+    // change the state of isloaded to false or whatever and then show a loading text in the box
 
-    console.log("submitting");
+    // before fetching handle if they have not entered anything into the search box and also handle if
+    // they have not selected a media type so it works with the backend
 
-    fetch(`/api?term=${searchText}&media=${media}`, postMethod)
-      .then((response) => response.text())
-      .then((data) => console.log(data));
-    // .catch((err) => console.log(err));
+    if (searchText !== "" && media !== "") {
+      fetch(`/api?term=${searchText}&media=${media}`, postMethod)
+        .then((response) => response.json())
+        .then((data) => {
+          setSearchResults(data.results);
+          console.log(searchResults);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert(
+        "Please enter what you would like to search for and what media type"
+      );
+    }
   };
 
   return (
-    <div>
+    <div id="formInput">
       <FormControl className={classesInput.margin} style={{ minWidth: 300 }}>
-        <InputLabel htmlFor="demo-customized-textbox">Search</InputLabel>
+        <InputLabel htmlFor="demo-customized-textbox">
+          What are you looking for?
+        </InputLabel>
         <BootstrapInput
           id="demo-customized-textbox"
           value={searchText}
@@ -105,15 +117,13 @@ export default function InputForm() {
       <FormControl
         variant="outlined"
         className={classes.formControl}
-        style={{ minWidth: 300 }}>
-        <InputLabel htmlFor="outlined-age-native-simple">
-          Type of Media
-        </InputLabel>
+        style={{ minWidth: 300, backgroundColor: "white" }}>
+        <InputLabel htmlFor="outlined-age-native-simple">Media Type</InputLabel>
         <Select
           native
           value={media}
           onChange={handleChange}
-          label="Type of Media"
+          label="Media Type"
           inputProps={{
             name: "media",
             id: "outlined-age-native-simple",
@@ -139,6 +149,8 @@ export default function InputForm() {
         onClick={() => handleSubmit()}>
         Search
       </Button>
+      {/* add a results component and a favourites component */}
+      <SearchResults searchResults={searchResults} />
     </div>
   );
 }

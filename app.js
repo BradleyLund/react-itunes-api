@@ -3,6 +3,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+require("isomorphic-fetch");
 
 var app = express();
 
@@ -25,9 +26,13 @@ app.post("/api", (req, res) => {
   // we need to replace the spaces with a + for the term
   term = term.split(" ").join("+");
 
-  res.send(`${media}
-  ${term}`);
-  console.log("yes");
+  // do a fetch to the itunes api and then return the results to the front end
+  fetch(`https://itunes.apple.com/search?term=${term}+Express&media=${media}`)
+    .then((response) => response.json())
+    .then((data) =>
+      // do all the processing and res the data here
+      res.send(data)
+    );
 });
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
