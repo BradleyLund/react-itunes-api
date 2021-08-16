@@ -4,9 +4,6 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-
 var app = express();
 
 // view engine setup
@@ -19,9 +16,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+// the post request from the frontend of the application which will fetch from the itunes store with the
+// parameters input
+app.post("/api", (req, res) => {
+  let media = req.query.media;
+  let term = req.query.term;
 
+  // we need to replace the spaces with a + for the term
+  term = term.split(" ").join("+");
+
+  res.send(`${media}
+  ${term}`);
+  console.log("yes");
+});
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -36,10 +43,6 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
-});
-
-app.get("/", (req, res) => {
-  res.send("Hello, it is working");
 });
 
 module.exports = app;
