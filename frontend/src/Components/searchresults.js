@@ -1,10 +1,19 @@
 import React from "react";
 import SearchResultCard from "./searchresultcard";
+import { Container, Row, Col } from "react-bootstrap";
 
 export default function SearchResults(props) {
   console.log(props.searchResults);
-  const results = props.searchResults.map((result) => (
-    <SearchResultCard result={result} />
+  const results = props.searchResults.map((result, index) => (
+    <Col>
+      <SearchResultCard result={result} key={index} />
+    </Col>
   ));
-  return <div>{results}</div>;
+  return (
+    <Container>
+      <Row xs={1} md={2} lg={4}>
+        {results}
+      </Row>
+    </Container>
+  );
 }
