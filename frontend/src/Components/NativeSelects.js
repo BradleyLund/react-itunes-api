@@ -5,6 +5,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 
+// I probably need to combine the two input and select into one component to access both states when the user clicks submit
+// maybe try using hooks to get that working
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -17,17 +19,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NativeSelects() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    media: "",
-    name: "hai",
-  });
+  const [media, setMedia] = React.useState("");
 
   const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
+    setMedia(event.target.value);
+    console.log(media);
   };
 
   return (
@@ -41,7 +37,7 @@ export default function NativeSelects() {
         </InputLabel>
         <Select
           native
-          value={state.media}
+          value={media}
           onChange={handleChange}
           label="Type of Media"
           inputProps={{
