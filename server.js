@@ -10,10 +10,10 @@ require("isomorphic-fetch");
 // secure the app with helmet
 // app.use(helmet());
 
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "frontend/build")));
 
 app.get("/*", function (req, res) {
-  res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
 });
 
 // the post request from the frontend of the application which will fetch from the itunes store with the
