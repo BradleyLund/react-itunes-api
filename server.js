@@ -1,34 +1,19 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-const helmet = require("helmet");
+const express = require("express");
+const path = require("path");
+const app = express();
+
+// const helmet = require("helmet");
 
 // we need to install and require this as it is not built in like in browsers
 require("isomorphic-fetch");
 
-var app = express();
-
-// I used the out of the box express generator with all the functions that come with it
-
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-
 // secure the app with helmet
-app.use(helmet());
+// app.use(helmet());
 
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "frontend/build")));
 
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
-
-// send a response for a standard get request on the root directory to show that the server is up and running
-app.get("/", (req, res) => {
-  res.send("Online");
+app.get("/", function (req, res) {
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
 });
 
 // the post request from the frontend of the application which will fetch from the itunes store with the
@@ -51,5 +36,5 @@ app.post("/api", (req, res) => {
     );
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3030;
 app.listen(PORT);
