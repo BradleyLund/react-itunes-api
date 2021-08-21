@@ -27,7 +27,8 @@ const BootstrapInput = withStyles((theme) => ({
   },
   input: {
     borderRadius: 4,
-    position: "relative",
+    // THIS WAS THE LAST CHANGE i MADE TO TRY AND MAKE IT CENTERED
+    // position: "relative",
     backgroundColor: theme.palette.background.paper,
     border: "1px solid #ced4da",
     fontSize: 16,
