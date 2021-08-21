@@ -1,8 +1,10 @@
 {
   "name": "itunesfaves",
   "version": "0.0.0",
+  "main": "server.js",
   "private": true,
   "scripts": {
+    "frontend": "npm start --prefix frontend",
     "start": "node server.js",
     "test": "mocha",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
@@ -26,6 +28,6 @@
   "engines": {
     "node": "14.16.0",
     "npm":"7.20.1"
-  },
-  "homepage": "."
+  }
+  
 }
