@@ -20,12 +20,11 @@ app.use(cookieParser());
 // secure the app with helmet
 app.use(helmet());
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-  });
-}
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 // send a response for a standard get request on the root directory to show that the server is up and running
 app.get("/", (req, res) => {
@@ -51,8 +50,6 @@ app.post("/api", (req, res) => {
       res.send(data)
     );
 });
-
-app.use(express.static(path.join(__dirname, "frontend/build")));
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT);
