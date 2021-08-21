@@ -8,8 +8,10 @@ import Button from "@material-ui/core/Button";
 import SearchResults from "./searchresults";
 import Favourites from "./favouritescomponent";
 
-// I probably need to combine the two input and select into one component to access both states when the user clicks submit
-// maybe try using hooks to get that working
+// I used material ui components for the input box and for the select box
+// you can find the components here: https://material-ui.com/components/selects/
+
+// the built in styles that come with the component
 const useStyles = makeStyles((theme) => ({
   formControl: {
     // margin: theme.spacing(1),
@@ -20,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// built in from material UI
 const BootstrapInput = withStyles((theme) => ({
   root: {
     "label + &": {
@@ -28,14 +31,12 @@ const BootstrapInput = withStyles((theme) => ({
   },
   input: {
     borderRadius: 4,
-    // THIS WAS THE LAST CHANGE i MADE TO TRY AND MAKE IT CENTERED
-    // position: "relative",
+
     backgroundColor: theme.palette.background.paper,
     border: "1px solid #ced4da",
     fontSize: 16,
     padding: "10px 26px 10px 12px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
-    // Use the system font instead of the default Roboto font.
     fontFamily: [
       "Roboto",
       '"Helvetica Neue"',
@@ -59,60 +60,79 @@ const useStylesInput = makeStyles((theme) => ({
   },
 }));
 
+// I wanted to get more familiar with hooks in a functional component so I used hooks instead of a
+// class component with a state and constructor function
+
+// I read up on the react docs how to use them and why they are useful
+// https://reactjs.org/docs/hooks-intro.html
+
 export default function InputForm() {
   const classes = useStyles();
+
+  // initialise a new state variable for the media select
   const [media, setMedia] = React.useState("");
 
+  // handling the changing of the select component
   const handleChange = (event) => {
     setMedia(event.target.value);
-    console.log(media);
   };
 
   const classesInput = useStylesInput();
+  // new state variable using useState hook
   const [searchText, setSearchText] = React.useState("");
+
+  // handle the change of the text in the input box
   const handleChangeInput = (event) => {
     setSearchText(event.target.value);
-    console.log(searchText);
-    console.log(media);
   };
 
+  // initialising the results state with hooks, and naming the function that will let us update the state in the future
   const [searchResults, setSearchResults] = React.useState([]);
 
+  // initialising the state for the favourites
   const [favourites, setFavourites] = React.useState([]);
 
+  // handling the adding of the favourites, using es6 destructuring for the array to make sure the new favourites array is set correctly
   const handleAddFavourite = (favouriteDetail) => {
     setFavourites([...favourites, favouriteDetail]);
-    console.log(favourites);
   };
 
+  // the handler function for removing a favourite
   const handleRemoveFavourite = (favouriteDetail) => {
+    // using the es6 destructuring
     let favouriteList = [...favourites];
+
+    // find the index of the one that has been clicked to remove
     let indexToRemove = favouriteList.indexOf(favouriteDetail);
+
+    // splice it from the array
     favouriteList.splice(indexToRemove, 1);
 
+    // set the new state of the favourite to the spliced up array
     setFavourites(favouriteList);
   };
 
+  // handling the search button
   const handleSubmit = () => {
     // an object that will be passed to the fetch method to show that it is a post request
     const postMethod = {
       method: "POST",
     };
 
-    // change the state of isloaded to false or whatever and then show a loading text in the box
-
     // before fetching handle if they have not entered anything into the search box and also handle if
     // they have not selected a media type so it works with the backend
 
     if (searchText !== "" && media !== "") {
+      // fetch from the backend the data we would like with the search terms
       fetch(`/api?term=${searchText}&media=${media}`, postMethod)
         .then((response) => response.json())
         .then((data) => {
+          // using the function to update the state of the results
           setSearchResults(data.results);
-          console.log(searchResults);
         })
         .catch((err) => console.log(err));
     } else {
+      // If they have not entered in the search box or selected a media type, alert them
       alert(
         "Please enter what you would like to search for and what media type"
       );
@@ -121,12 +141,14 @@ export default function InputForm() {
 
   return (
     <div id="formInput">
+      {/* giving it a min width for styling */}
       <FormControl className={classesInput.margin} style={{ minWidth: 300 }}>
         <InputLabel htmlFor="demo-customized-textbox">
           What are you looking for?
         </InputLabel>
         <BootstrapInput
           id="demo-customized-textbox"
+          // the value of the input passed down from the state variable, no need to use this like in class components
           value={searchText}
           onChange={handleChangeInput}
         />
@@ -138,13 +160,16 @@ export default function InputForm() {
         <InputLabel htmlFor="outlined-age-native-simple">Media Type</InputLabel>
         <Select
           native
+          // the state of media passed down as value
           value={media}
+          // the onchange handler
           onChange={handleChange}
           label="Media Type"
           inputProps={{
             name: "media",
             id: "outlined-age-native-simple",
           }}>
+          {/* the select options below */}
           <option aria-label="None" value="" />
           <option value={"movie"}>Movie</option>
           <option value={"podcast"}>Podcast</option>
@@ -164,14 +189,17 @@ export default function InputForm() {
         color="primary"
         id="searchButton"
         className={classes.margin}
+        // pass the onclick function for handling the submit
         onClick={() => handleSubmit()}>
         Search
       </Button>
       {/* add a results component and a favourites component */}
+      {/* pass add favourite handler as the results you can add it to your favourite */}
       <SearchResults
         searchResults={searchResults}
         handleAddFavourite={handleAddFavourite}
       />
+      {/* pass the remove from favourites handler to the favourites cards */}
       <Favourites
         favourites={favourites}
         handleRemoveFavourite={handleRemoveFavourite}

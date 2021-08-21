@@ -2,14 +2,17 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
-export default function SearchResultCard(props) {
-  console.log(props.result);
+// using cards from bootstrap to display the results of the search and the favourites
 
+export default function SearchResultCard(props) {
   return (
+    // min width is important for styling for when it goes to mobile
     <Card style={{ minWidth: "18rem" }}>
       <Card.Img
+        // image is 100*100 from itunes
         style={{ width: "100px", margin: "auto" }}
         variant="top"
+        // the link to the image from itunes
         src={props.result.artworkUrl100}
       />
       <Card.Body>

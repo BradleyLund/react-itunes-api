@@ -1,4 +1,5 @@
 import React from "react";
+// simple header div with some information
 
 export default function Header() {
   return (

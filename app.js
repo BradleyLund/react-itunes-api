@@ -5,13 +5,12 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const helmet = require("helmet");
 
+// we need to install and require this as it is not built in like in browsers
 require("isomorphic-fetch");
 
 var app = express();
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+// I used the out of the box express generator with all the functions that come with it
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -21,6 +20,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // secure the app with helmet
 app.use(helmet());
+
+// send a response for a standard get request on the root directory to show that the server is up and running
 app.get("/", (req, res) => {
   res.send("Online");
 });
@@ -28,6 +29,7 @@ app.get("/", (req, res) => {
 // the post request from the frontend of the application which will fetch from the itunes store with the
 // parameters input
 app.post("/api", (req, res) => {
+  // get the parameters from the query
   let media = req.query.media;
   let term = req.query.term;
 
