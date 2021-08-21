@@ -27,7 +27,8 @@ app.post("/api", (req, res) => {
   term = term.split(" ").join("+");
 
   // do a fetch to the itunes api and then return the results to the front end
-  fetch(`https://itunes.apple.com/search?term=${term}&media=${media}`)
+  // limit the results to 20
+  fetch(`https://itunes.apple.com/search?term=${term}&media=${media}&limit=12`)
     .then((response) => response.json())
     .then((data) =>
       // do all the processing and res the data here

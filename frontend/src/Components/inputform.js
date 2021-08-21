@@ -6,6 +6,7 @@ import Select from "@material-ui/core/Select";
 import InputBase from "@material-ui/core/InputBase";
 import Button from "@material-ui/core/Button";
 import SearchResults from "./searchresults";
+import Favourites from "./favouritescomponent";
 
 // I probably need to combine the two input and select into one component to access both states when the user clicks submit
 // maybe try using hooks to get that working
@@ -76,6 +77,21 @@ export default function InputForm() {
   };
 
   const [searchResults, setSearchResults] = React.useState([]);
+
+  const [favourites, setFavourites] = React.useState([]);
+
+  const handleAddFavourite = (favouriteDetail) => {
+    setFavourites([...favourites, favouriteDetail]);
+    console.log(favourites);
+  };
+
+  const handleRemoveFavourite = (favouriteDetail) => {
+    let favouriteList = [...favourites];
+    let indexToRemove = favouriteList.indexOf(favouriteDetail);
+    favouriteList.splice(indexToRemove, 1);
+
+    setFavourites(favouriteList);
+  };
 
   const handleSubmit = () => {
     // an object that will be passed to the fetch method to show that it is a post request
@@ -152,7 +168,14 @@ export default function InputForm() {
         Search
       </Button>
       {/* add a results component and a favourites component */}
-      <SearchResults searchResults={searchResults} />
+      <SearchResults
+        searchResults={searchResults}
+        handleAddFavourite={handleAddFavourite}
+      />
+      <Favourites
+        favourites={favourites}
+        handleRemoveFavourite={handleRemoveFavourite}
+      />
     </div>
   );
 }

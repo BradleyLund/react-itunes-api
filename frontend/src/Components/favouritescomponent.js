@@ -2,20 +2,21 @@ import React from "react";
 import SearchResultCard from "./searchresultcard";
 import { Container, Row, Col } from "react-bootstrap";
 
-export default function SearchResults(props) {
-  console.log(props.searchResults);
-  const results = props.searchResults.map((result, index) => (
+export default function Favourites(props) {
+  console.log(props.favourites);
+  const results = props.favourites.map((result, index) => (
     <Col>
       <SearchResultCard
         result={result}
         key={index}
-        handleAddFavourite={props.handleAddFavourite}
-        addOrRemove={"Add to Favourites"}
+        handleRemoveFavourite={props.handleRemoveFavourite}
+        addOrRemove={"Remove From Favourites"}
       />
     </Col>
   ));
   return (
-    <div id="resultsDiv">
+    <div id="favouritesDiv">
+      <h2>Your list of Favourites:</h2>
       <Container>
         <Row xs={1} md={2} lg={2}>
           {results}

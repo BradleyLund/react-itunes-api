@@ -7,11 +7,12 @@ export default function NavbarComponent() {
   return (
     <Navbar bg="dark" variant="dark" fixed="top">
       <Container>
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+        <Navbar.Brand href="#headerDiv">iTunes API</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
+          <Nav.Link href="#headerDiv">Search</Nav.Link>
+
+          <Nav.Link href="#resultsDiv">Results</Nav.Link>
+          <Nav.Link href="#favouritesDiv">Favourites</Nav.Link>
         </Nav>
       </Container>
     </Navbar>
