@@ -11,7 +11,7 @@ import SearchResults from "./searchresults";
 // maybe try using hooks to get that working
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
+    // margin: theme.spacing(1),
     minWidth: 120,
   },
   selectEmpty: {
@@ -146,6 +146,7 @@ export default function InputForm() {
         variant="contained"
         size="large"
         color="primary"
+        id="searchButton"
         className={classes.margin}
         onClick={() => handleSubmit()}>
         Search

@@ -8,6 +8,9 @@ export default function Header() {
       songs, movies, books and other forms of media. <br></br>
       <br></br> Once you have found what you are looking for you can add them to
       your list of favourites
+      <br></br>
+      <br></br>
+      Search Below:
     </div>
   );
 }

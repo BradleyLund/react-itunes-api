@@ -10,10 +10,12 @@ export default function SearchResults(props) {
     </Col>
   ));
   return (
-    <Container>
-      <Row xs={1} md={2} lg={4}>
-        {results}
-      </Row>
-    </Container>
+    <div id="resultsDiv">
+      <Container>
+        <Row xs={1} md={2} lg={2}>
+          {results}
+        </Row>
+      </Container>
+    </div>
   );
 }
