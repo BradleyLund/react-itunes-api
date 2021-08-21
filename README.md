@@ -50,7 +50,7 @@ Then run the following:
 
 The server and the frontend should now be running. Open up the browser and
 navigate to:
-<a href="http://localhost:3000/#headerDiv">http://localhost:3000/#headerDiv</a>
+<a href="http://localhost:3000">http://localhost:3000/#headerDiv</a>
 
 To test the backend, run npm test in the iTunesFaves directory.
 
@@ -67,3 +67,6 @@ I have used <a href="https://helmetjs.github.io/">Helmet</a> to secure the
 application
 
 ## Link to the application deployed on heroku
+
+You can access a live version of this application at this address:
+<a href="https://ancient-spire-93066.herokuapp.com/">iTunes API App</a>
