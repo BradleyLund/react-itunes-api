@@ -1,4 +1,4 @@
-let app = require("../app.js");
+let app = require("../server.js");
 let expect = require("chai").expect;
 let request = require("request");
 
