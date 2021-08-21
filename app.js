@@ -16,7 +16,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, "public")));
 
 // secure the app with helmet
 app.use(helmet());
@@ -53,4 +52,7 @@ app.post("/api", (req, res) => {
     );
 });
 
-module.exports = app;
+app.use(express.static(path.join(__dirname, "frontend/build")));
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT);
