@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  id="favouritesDiv"
+>
+  <h2>
+    Your list of Favourites:
+  </h2>
+  <div
+    className="container"
+  >
+    <div
+      className="row row-cols-lg-2 row-cols-md-2 row-cols-1"
+    >
+      <div
+        className="col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "minWidth": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/fc/f7/43/fcf74301-0529-c4e9-3066-bed8c45c5a66/source/100x100bb.jpg"
+            style={
+              Object {
+                "margin": "auto",
+                "width": "100px",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
+            >
+              Hello!
+            </div>
+            <div
+              className="card-title h5"
+            >
+              Andrew Rannells, Josh Gad, Rory O'Malley, Kevin Duda, Clark Johnsen, Justin Bohon, Brian Sears, Scott Barnhardt, Benjamin Schrader, Lewis Cleale & Jason Michael Snow
+            </div>
+            <button
+              className="btn btn-primary"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              Remove From Favourites
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

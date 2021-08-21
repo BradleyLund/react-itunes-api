@@ -14,14 +14,29 @@ export default function Favourites(props) {
       />
     </Col>
   ));
-  return (
-    <div id="favouritesDiv">
-      <h2>Your list of Favourites:</h2>
-      <Container>
-        <Row xs={1} md={2} lg={2}>
-          {results}
-        </Row>
-      </Container>
-    </div>
-  );
+
+  if (props.favourites.length === 0) {
+    return (
+      <div
+        id="favouritesDiv"
+        style={{ fontSize: "25px", marginTop: "10px", marginBottom: "100px" }}>
+        <h2>Your list of Favourites:</h2>
+        <div>
+          You currently have no favourites, search above and add some items to
+          your favourites
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div id="favouritesDiv">
+        <h2>Your list of Favourites:</h2>
+        <Container>
+          <Row xs={1} md={2} lg={2}>
+            {results}
+          </Row>
+        </Container>
+      </div>
+    );
+  }
 }

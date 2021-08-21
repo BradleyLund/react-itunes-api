@@ -3,6 +3,8 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const helmet = require("helmet");
+
 require("isomorphic-fetch");
 
 var app = express();
@@ -16,6 +18,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+// secure the app with helmet
+app.use(helmet());
 
 // the post request from the frontend of the application which will fetch from the itunes store with the
 // parameters input
