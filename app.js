@@ -21,6 +21,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // secure the app with helmet
 app.use(helmet());
+app.get("/", (req, res) => {
+  res.send("Online");
+});
 
 // the post request from the frontend of the application which will fetch from the itunes store with the
 // parameters input
